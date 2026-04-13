@@ -10,7 +10,7 @@ set -o pipefail
 #
 # Dependencies: gh, yq (v4+), jq, base64
 
-ORGS=("validatedpatterns" "validatedpatterns-sandbox")
+ORGS=(${ORGS[@]:-"validatedpatterns" "validatedpatterns-sandbox"})
 TOPIC=${TOPIC:-pattern}
 GENERATOR_VERSION="1.0"
 CATALOG_DIR="catalog"

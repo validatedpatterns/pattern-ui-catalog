@@ -14,6 +14,10 @@ help: ## Display this help.
 
 ##@ Pattern Catalog
 
+.PHONY: list-patterns
+list-patterns: ## Lists all pattern repos
+	./list-all-patterns.sh
+
 .PHONY: generate-catalog
 generate-catalog: ## Generates actual catalog yaml tree
 	./generate-catalog.sh
