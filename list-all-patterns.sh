@@ -5,7 +5,7 @@ set -o pipefail
 # - validatedpatterns
 # - validatedpatterns-sandbox
 
-ORGS=("validatedpatterns" "validatedpatterns-sandbox")
+ORGS=(${ORGS[@]:-"validatedpatterns" "validatedpatterns-sandbox"})
 TOPIC=${TOPIC:-pattern}
 
 for org in ${ORGS[@]}; do
