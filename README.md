@@ -71,6 +71,22 @@ You can build your own catalog image containing a curated set of patterns. This
 is useful when you maintain internal or third-party patterns that are not part of
 the upstream `validatedpatterns` organizations.
 
+If the patterns you want to include are all hosted on GitHub you can just run the
+following script:
+
+```sh
+TOPIC=pattern ORGS="org1 org2" make generate-catalog
+```
+
+The above script will generate the catalog bit by using
+any repo with the `pattern` topic (topics are some sort of tags on GitHub)
+in `org1` and `org2` on github. Then you can just skip to section
+[Build and push the image](#2-build-and-push-the-image).
+
+```sh
+make UPLOADREGISTRY=quay.io/<my_own_org> pattern-ui-catalog-build pattern-ui-catalog-push
+```
+
 ### 1. Prepare the catalog directory
 
 Create a `catalog/` tree with the following structure:
@@ -127,6 +143,9 @@ external_requirements: null
 org: my-org
 spoke: null
 ```
+
+**`catalog/<name>/values-secret.yaml.template`** - metadata for secret material
+for the pattern. See [here](https://validatedpatterns.io/learn/secrets-management-in-the-validated-patterns-framework/) for more information.
 
 You can optionally validate your files against the JSON schemas shipped in this
 repository:
