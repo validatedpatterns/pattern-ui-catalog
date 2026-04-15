@@ -6,7 +6,7 @@ set -o pipefail
 # - validatedpatterns-sandbox
 
 ORGS=(${ORGS[@]:-"validatedpatterns" "validatedpatterns-sandbox"})
-TOPIC=${TOPIC:-pattern}
+TOPIC=${TOPIC:-"ui-catalog-enabled"}
 
 for org in ${ORGS[@]}; do
     REPOS=$(gh repo list "${org}" --no-archived --topic "${TOPIC}" --visibility public --limit 100 |awk '{ print $1 }' | sort)
