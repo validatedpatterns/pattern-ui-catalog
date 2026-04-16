@@ -14,6 +14,10 @@ help: ## Display this help.
 
 ##@ Pattern Catalog
 
+.PHONY: list-patterns
+list-patterns: ## Lists all pattern repos
+	./list-all-patterns.sh
+
 .PHONY: generate-catalog
 generate-catalog: ## Generates actual catalog yaml tree
 	./generate-catalog.sh
@@ -22,6 +26,16 @@ generate-catalog: ## Generates actual catalog yaml tree
 .PHONY: generate-dockerfile
 generate-dockerfile: ## Generate Dockerfile from template
 	VERSION=$(VERSION) SUPPORTED_OCP_VERSIONS=$(SUPPORTED_OCP_VERSIONS) envsubst < templates/pattern-ui-catalog.Dockerfile.template > $(PATTERN_CATALOG_DOCKERFILE)
+
+.PHONY: schema-validate
+schema-validate: ## Validate catalog YAML files against JSON schemas
+	@command -v check-jsonschema >/dev/null 2>&1 || { echo "Error: check-jsonschema not found. Install with: pip install check-jsonschema"; exit 1; }
+	check-jsonschema --schemafile catalog.schema.json catalog/catalog.yaml
+	@for f in catalog/*/pattern.yaml; do \
+		echo "Validating $$f..."; \
+		check-jsonschema --schemafile pattern.schema.json "$$f"; \
+	done
+	@echo "All catalog files validated successfully."
 
 .PHONY: pattern-ui-catalog-build
 pattern-ui-catalog-build: generate-dockerfile## Build the pattern catalog image

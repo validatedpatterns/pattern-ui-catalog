@@ -1,0 +1,42 @@
+metadata_version: "1.0"
+name: hypershift
+description: An infrastructure pattern for deploying and managing OpenShift clusters using HyperShift.
+pattern_version: "1.0"
+display_name: HyperShift
+repo_url: https://github.com/validatedpatterns-sandbox/hypershift
+docs_repo_url: https://github.com/validatedpatterns/docs
+issues_url: https://github.com/validatedpatterns-sandbox/hypershift/issues
+docs_url: https://validatedpatterns.io/patterns/hypershift/
+ci_url: https://validatedpatterns.io/ci/?pattern=hypershift
+tier: tested
+owners:
+  - day0hero
+requirements:
+  hub:
+    compute:
+      gcp:
+        replicas: 3
+        type: n1-standard-8
+      azure:
+        replicas: 3
+        type: Standard_D8s_v3
+      aws:
+        replicas: 3
+        type: m5.4xlarge
+    controlPlane:
+      gcp:
+        replicas: 3
+        type: n1-standard-4
+      azure:
+        replicas: 3
+        type: Standard_D4s_v3
+      aws:
+        replicas: 3
+        type: m5.2xlarge
+extra_features:
+  hypershift_support: true
+  spoke_support: false
+external_requirements:
+  s3_bucket: true
+org: validatedpatterns-sandbox
+spoke: null

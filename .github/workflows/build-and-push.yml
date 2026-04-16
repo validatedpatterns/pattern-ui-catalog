@@ -62,7 +62,7 @@ jobs:
           buildah push "${CONTAINER}-${TARGETARCH}" "docker-archive:/tmp/image-${TARGETARCH}.tar:${CONTAINER}-${TARGETARCH}"
 
       - name: Upload image artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: image-${{ matrix.targetarch }}-${{ github.run_id }}
           path: /tmp/image-${{ matrix.targetarch }}.tar
@@ -79,13 +79,13 @@ jobs:
 
     steps:
       - name: Download AMD64 image
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: image-amd64-${{ github.run_id }}
           path: /tmp
 
       - name: Download ARM64 image
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: image-arm64-${{ github.run_id }}
           path: /tmp
@@ -116,7 +116,7 @@ jobs:
           echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
 
       - name: Install cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
         with:
           cosign-release: "v2.2.4"
 

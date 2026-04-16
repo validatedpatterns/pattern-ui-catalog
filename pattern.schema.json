@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://validatedpatterns.io/pattern.schema.json",
+  "title": "Validated Pattern Metadata",
+  "description": "Schema for validated pattern metadata files (pattern.yaml)",
+  "type": "object",
+  "required": [
+    "metadata_version",
+    "name",
+    "pattern_version",
+    "display_name",
+    "repo_url",
+    "docs_repo_url",
+    "issues_url",
+    "docs_url",
+    "ci_url",
+    "tier",
+    "owners",
+    "requirements",
+    "extra_features",
+    "org"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata_version": {
+      "type": "string",
+      "description": "Version of the metadata format",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Unique identifier for the pattern",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the pattern"
+    },
+    "pattern_version": {
+      "type": "string",
+      "description": "Version of the pattern",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Human-readable display name"
+    },
+    "repo_url": {
+      "type": "string",
+      "description": "URL to the pattern repository",
+      "format": "uri"
+    },
+    "docs_repo_url": {
+      "type": "string",
+      "description": "URL to the documentation repository",
+      "format": "uri"
+    },
+    "issues_url": {
+      "type": "string",
+      "description": "URL to the issue tracker",
+      "format": "uri"
+    },
+    "docs_url": {
+      "type": "string",
+      "description": "URL to the pattern documentation",
+      "format": "uri"
+    },
+    "ci_url": {
+      "type": "string",
+      "description": "URL to the CI/CD pipeline",
+      "format": "uri"
+    },
+    "tier": {
+      "type": "string",
+      "description": "Support tier for the pattern",
+      "enum": ["maintained", "tested", "sandbox"]
+    },
+    "owners": {
+      "type": "array",
+      "description": "List of pattern owners (GitHub usernames)",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "requirements": {
+      "type": "object",
+      "description": "Infrastructure requirements for the pattern",
+      "required": ["hub"],
+      "additionalProperties": false,
+      "properties": {
+        "hub": {
+          "$ref": "#/$defs/clusterRequirements"
+        },
+        "spoke": {
+          "$ref": "#/$defs/clusterRequirements"
+        }
+      }
+    },
+    "extra_features": {
+      "type": "object",
+      "description": "Additional feature flags",
+      "required": ["hypershift_support", "spoke_support"],
+      "additionalProperties": false,
+      "properties": {
+        "hypershift_support": {
+          "type": "boolean"
+        },
+        "spoke_support": {
+          "type": "boolean"
+        }
+      }
+    },
+    "external_requirements": {
+      "description": "Additional external requirements or null",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "cluster_sizing_note": {
+              "type": "string",
+              "description": "Additional notes about cluster sizing"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "org": {
+      "type": "string",
+      "description": "GitHub organization name"
+    },
+    "spoke": {
+      "description": "Spoke configuration (reserved for future use)",
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "cloudProviderSpec": {
+      "type": "object",
+      "required": ["replicas", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of replicas"
+        },
+        "type": {
+          "type": "string",
+          "description": "Instance/machine type"
+        }
+      }
+    },
+    "nodePoolSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "aws": {
+          "$ref": "#/$defs/cloudProviderSpec"
+        },
+        "gcp": {
+          "$ref": "#/$defs/cloudProviderSpec"
+        },
+        "azure": {
+          "$ref": "#/$defs/cloudProviderSpec"
+        }
+      }
+    },
+    "clusterRequirements": {
+      "type": "object",
+      "description": "Requirements for a cluster (hub or spoke)",
+      "required": ["compute", "controlPlane"],
+      "additionalProperties": false,
+      "properties": {
+        "compute": {
+          "$ref": "#/$defs/nodePoolSpec"
+        },
+        "controlPlane": {
+          "$ref": "#/$defs/nodePoolSpec"
+        }
+      }
+    }
+  }
+}
