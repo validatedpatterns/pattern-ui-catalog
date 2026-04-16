@@ -123,7 +123,7 @@
               "description": "Additional notes about cluster sizing"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       ]
     },

@@ -36,7 +36,7 @@ requirements:
 extra_features:
   hypershift_support: true
   spoke_support: false
-external_requirements: null
-s3 bucket: true
+external_requirements:
+  s3_bucket: true
 org: validatedpatterns-sandbox
 spoke: null
