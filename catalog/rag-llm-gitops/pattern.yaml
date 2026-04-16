@@ -30,3 +30,4 @@ external_requirements:
     This pattern will require nodes with GPUs which are only supported in certain regions. You can create them before deploying the pattern via the special `make create-gpu-machineset` command, after the initial cluster has been created.
 org: validatedpatterns
 spoke: null
+clustergroupname: hub

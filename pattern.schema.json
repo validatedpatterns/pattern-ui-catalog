@@ -134,6 +134,10 @@
     "spoke": {
       "description": "Spoke configuration (reserved for future use)",
       "type": "null"
+    },
+    "clustergroupname": {
+      "type": "string",
+      "description": "Default clusterGroupName to use"
     }
   },
   "$defs": {
