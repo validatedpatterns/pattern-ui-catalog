@@ -99,6 +99,21 @@ for org in "${ORGS[@]}"; do
             continue
         fi
 
+        # Fetch values-global.yaml and extract clusterGroupName
+        global_response=$(gh api "repos/${full_slug}/contents/values-global.yaml" 2>/dev/null)
+        if [ $? -eq 0 ]; then
+            global_yaml=$(echo "${global_response}" | jq -r '.content' | base64 -d)
+            if [ $? -eq 0 ]; then
+                cluster_group_name=$(echo "${global_yaml}" | yq -r '.main.clusterGroupName // ""')
+                if [ -n "${cluster_group_name}" ]; then
+                    echo "  Found clusterGroupName: ${cluster_group_name}" >&2
+                    pattern_json=$(echo "${pattern_json}" | jq --arg cgn "${cluster_group_name}" '.clustergroupname = $cgn')
+                fi
+            else
+                echo "  Failed to decode values-global.yaml, skipping clusterGroupName." >&2
+            fi
+        fi
+
         # Write per-pattern YAML
         mkdir -p "${CATALOG_DIR}/${repo_name}"
         echo "${pattern_json}" | yq -P '.' > "${CATALOG_DIR}/${repo_name}/pattern.yaml"

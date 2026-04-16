@@ -40,3 +40,4 @@ external_requirements:
   s3_bucket: true
 org: validatedpatterns-sandbox
 spoke: null
+clustergroupname: prod

@@ -61,3 +61,4 @@ extra_features:
 external_requirements: null
 org: validatedpatterns
 spoke: null
+clustergroupname: hub
