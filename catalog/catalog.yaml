@@ -1,10 +1,11 @@
-generated_at: "2026-03-13T15:39:18Z"
+generated_at: "2026-04-16T09:03:31Z"
 generator_version: "1.0"
-catalog_description: 'Additional patterns can be found here: <a href="https://validatedpatterns.io">validatedpatterns.io</a>'
+catalog_description: '(Tech-Preview) Additional patterns can be found here: <a href="https://validatedpatterns.io">validatedpatterns.io</a>'
 patterns:
   - ansible-edge-gitops
-  - industrial-edge
-  - medical-diagnosis
+  - layered-zero-trust
+  - mlops-fraud-detection
   - multicloud-gitops
   - rag-llm-gitops
-  - openshift-ai
+  - travelops
+  - hypershift

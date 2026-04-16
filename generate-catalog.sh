@@ -10,8 +10,8 @@ set -o pipefail
 #
 # Dependencies: gh, yq (v4+), jq, base64
 
-ORGS=("validatedpatterns" "validatedpatterns-sandbox")
-TOPIC=${TOPIC:-pattern}
+ORGS=(${ORGS[@]:-"validatedpatterns" "validatedpatterns-sandbox"})
+TOPIC=${TOPIC:-"ui-catalog-enabled"}
 GENERATOR_VERSION="1.0"
 CATALOG_DIR="catalog"
 
@@ -120,7 +120,7 @@ for org in "${ORGS[@]}"; do
 done
 
 # Build catalog index
-CATALOG_DESCRIPTION=${CATALOG_DESCRIPTION:-'Additional patterns can be found here: <a href="https://validatedpatterns.io">validatedpatterns.io</a>'}
+CATALOG_DESCRIPTION=${CATALOG_DESCRIPTION:-'(Tech-Preview) Additional patterns can be found here: <a href="https://validatedpatterns.io">validatedpatterns.io</a>'}
 {
     echo "generated_at: \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
     echo "generator_version: \"${GENERATOR_VERSION}\""
