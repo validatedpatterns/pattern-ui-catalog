@@ -14,6 +14,7 @@ ORGS=(${ORGS[@]:-"validatedpatterns" "validatedpatterns-sandbox"})
 TOPIC=${TOPIC:-"ui-catalog-enabled"}
 GENERATOR_VERSION="1.0"
 CATALOG_DIR="catalog"
+CATALOG_LOGO="https://validatedpatterns.io/images/logo.png"
 
 # Normalize a single pattern-metadata.yaml (JSON from yq) into catalog schema.
 # Reads JSON on stdin, writes normalized JSON on stdout.
@@ -140,6 +141,7 @@ CATALOG_DESCRIPTION=${CATALOG_DESCRIPTION:-'(Tech-Preview) Additional patterns c
     echo "generated_at: \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
     echo "generator_version: \"${GENERATOR_VERSION}\""
     echo "catalog_description: '${CATALOG_DESCRIPTION}'"
+    echo "catalog_logo: \"${CATALOG_LOGO}\""
     echo "patterns:"
     for name in "${pattern_names[@]}"; do
         echo "  - ${name}"
