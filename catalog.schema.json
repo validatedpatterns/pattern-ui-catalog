@@ -21,6 +21,12 @@
       "type": "string",
       "description": "Description shown in the catalog UI"
     },
+    "catalog_logo": {
+      "type": "string",
+      "description": "URL of the logo image displayed on the catalog page",
+      "format": "uri",
+      "default": "https://validatedpatterns.io/images/logo.png"
+    },
     "patterns": {
       "type": "array",
       "description": "List of pattern identifiers included in the catalog",
