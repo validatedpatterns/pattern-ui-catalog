@@ -189,8 +189,8 @@ oc create configmap patterns-operator-config \
   --from-literal=catalog.image=quay.io/my-org/pattern-ui-catalog:1.0.0
 ```
 
-The operator picks up the change on its next reconciliation loop and performs a
-rolling update of the catalog deployment.
+The operator manager pod needs to be deleted for the change to be picked up.
+After that the UI will point to the new catalog.
 
 ## Authenticated container registries
 

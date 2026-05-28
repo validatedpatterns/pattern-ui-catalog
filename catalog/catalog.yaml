@@ -1,6 +1,7 @@
-generated_at: "2026-04-16T11:34:50Z"
+generated_at: "2026-05-28T09:09:10Z"
 generator_version: "1.0"
 catalog_description: '(Tech-Preview) Additional patterns can be found here: <a href="https://validatedpatterns.io">validatedpatterns.io</a>'
+catalog_logo: "https://validatedpatterns.io/images/logo.png"
 patterns:
   - ansible-edge-gitops
   - layered-zero-trust
