@@ -4,14 +4,12 @@ name: Validate YAML
 on:
   push:
     paths:
-      - '.github/workflows/yaml-lint.yaml'
       - 'catalog/**'
   pull_request:
     paths:
-      - '.github/workflows/yaml-lint.yaml'
       - 'catalog/**'
 
-permissions: read-all # zizmor: ignore[excessive-permissions]
+permissions: read-all  # zizmor: ignore[excessive-permissions]
 
 jobs:
   yaml_lint:
@@ -20,12 +18,12 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
         with:
           persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6
         with:
           python-version: "3.11"
 
@@ -33,4 +31,7 @@ jobs:
         run: pip install yamllint
 
       - name: Lint YAML files
-        run: yamllint -s -d '{extends: default, rules: {line-length: disable, document-start: disable}}' catalog/
+        run: >-
+          yamllint -s -d
+          '{extends: default, rules: {line-length: disable, document-start: disable}}'
+          catalog/
