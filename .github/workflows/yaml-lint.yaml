@@ -1,0 +1,37 @@
+---
+name: Validate YAML
+
+on:
+  push:
+    paths:
+      - 'catalog/**'
+  pull_request:
+    paths:
+      - 'catalog/**'
+
+permissions: read-all  # zizmor: ignore[excessive-permissions]
+
+jobs:
+  yaml_lint:
+    name: YAML lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6
+        with:
+          python-version: "3.11"
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Lint YAML files
+        run: >-
+          yamllint -s -d
+          '{extends: default, rules: {line-length: disable, document-start: disable}}'
+          catalog/

@@ -60,6 +60,12 @@ extra_features:
   hypershift_support: true
   spoke_support: true
 external_requirements: null
+variants:
+  - name: hub
+    default: true
+    description: Default multicluster hub/spoke Multicloud Gitops variant
+  - name: standalone
+    description: Single cluster Multicloud Gitops (no ACM) variant
 org: validatedpatterns
 spoke: null
 clustergroupname: hub
