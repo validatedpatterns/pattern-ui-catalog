@@ -143,6 +143,14 @@
       "type": "string",
       "description": "URL or path to a logo image for the pattern",
       "format": "uri"
+    },
+    "variants": {
+      "type": "array",
+      "description": "Deployment variants for the pattern",
+      "items": {
+        "$ref": "#/$defs/variant"
+      },
+      "minItems": 1
     }
   },
   "$defs": {
@@ -189,6 +197,26 @@
         },
         "controlPlane": {
           "$ref": "#/$defs/nodePoolSpec"
+        }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "description": "A deployment variant of the pattern",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique identifier for the variant"
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Whether this is the default variant"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the variant"
         }
       }
     }
