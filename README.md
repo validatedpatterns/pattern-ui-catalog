@@ -142,6 +142,10 @@ extra_features:
 external_requirements: null
 org: my-org
 spoke: null
+variants:
+  - name: default
+    default: true
+    description: Default deployment variant
 ```
 
 **`catalog/<name>/values-secret.yaml.template`** - metadata for secret material
