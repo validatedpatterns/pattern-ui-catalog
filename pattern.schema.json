@@ -144,6 +144,9 @@
       "description": "URL or path to a logo image for the pattern",
       "format": "uri"
     },
+    "ocp_versions": {
+      "$ref": "#/$defs/ocpVersions"
+    },
     "variants": {
       "type": "array",
       "description": "Deployment variants for the pattern",
@@ -217,6 +220,42 @@
         "description": {
           "type": "string",
           "description": "Human-readable description of the variant"
+        }
+      }
+    },
+    "ocpVersions": {
+      "type": "object",
+      "description": "OCP version compatibility requirements checked by the validate_ocp_version role during installation",
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "type": "string",
+          "description": "Minimum supported OCP version (e.g. 4.20). Versions below this trigger a warning.",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "unsupported": {
+          "type": "array",
+          "description": "Explicitly unsupported OCP versions that cause a hard fail during installation",
+          "items": {
+            "$ref": "#/$defs/unsupportedOcpVersion"
+          }
+        }
+      }
+    },
+    "unsupportedOcpVersion": {
+      "type": "object",
+      "description": "An OCP version that is explicitly not supported",
+      "required": ["version", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "OCP version string (e.g. 4.23)",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Human-readable explanation of why this version is unsupported"
         }
       }
     }
